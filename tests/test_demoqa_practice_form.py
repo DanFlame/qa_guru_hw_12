@@ -39,4 +39,39 @@ def test_positive_fill_practice_form(setup_chrome):
         practice_form.assert_fields(user)
 
 
+@allure.tag('WEB')
+@allure.label('owner', 'danflame')
+@allure.severity(Severity.CRITICAL)
+@allure.feature('Practice form')
+@allure.description('We should check that name field is not completed')
+@allure.story('Name is not complete')
+def test_empty_name(setup_chrome):
+    nameless_user = User(first_name='',
+                         last_name='Fazylov',
+                         email='daniel@test.ru',
+                         gender='Male',
+                         phone_number='8999123456',
+                         birth_year='1998',
+                         birth_month='November',
+                         birth_day=25,
+                         subject='Computer Science',
+                         hobby='Music',
+                         picture='picture.png',
+                         address='Indo st. 10',
+                         state='Uttar Pradesh',
+                         city='Agra'
+                         )
+
+    with allure.step('Open practice form'):
+        practice_form.page_open()
+
+    with allure.step('Data entering'):
+        practice_form.fill_data(nameless_user)
+    with allure.step('Submit data entering'):
+        practice_form.submit()
+
+    with allure.step('Assert fields'):
+        practice_form.assert_empty_name_field()
+
+
 practice_form = PracticeForm()
