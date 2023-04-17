@@ -1,4 +1,4 @@
 pytest>=7.2.0
 selene>=2.0.0b16
-allure-pytest
-selenium
+allure-pytest==2.13.1
+selenium==4.8.3
